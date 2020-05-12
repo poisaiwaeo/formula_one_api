@@ -1,0 +1,28 @@
+// GET all = visning af alle
+GET http://localhost:3005/formulaone
+
+###
+
+// GET with id = visning med id
+GET http://localhost:3005/formulaone/
+
+###
+
+// POST = opret
+POST http://localhost:3005/formulaone
+Content-Type: application/json
+
+{
+    "name": "Kimi Räikkönen",
+    "teams": "Alfa Romeo",
+    "number": "7",
+    "conutry": "Finland",
+    "place": "Espoo, Finland",
+    "birthday": "17/10/1979",
+    "podiums": "103",
+    "points": "1859",
+    "grandsprix": "315",
+    "championships": "1",
+    "race": "1 (x21)",
+    "gridposition": "1"
+}
