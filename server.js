@@ -14,15 +14,15 @@ app.use(cors()); //husk npm i cors
 app.use(express.json());
 app.use(express.static('public')); 
 
-// velkomme til serveren! GET http://localhost:3005/formulaone
+// velkomme til serveren! GET http://localhost:3007/formulaone
 app.get('/', async(req,res) => {
     res.send("Velkommen til serveren!")
 });
 
-// formulaone - router - http://localhost:3005/formulaone
+// formulaone - router - http://localhost:3007/formulaone
 const formulaoneRouter = require('./routes/formulaone');
 app.use('/formulaone', formulaoneRouter)
 'localhost:3005/formulaone/'
 
 
-app.listen(3005, () => console.log('Server Stared'))
+app.listen(3007, () => console.log('Server Stared'))

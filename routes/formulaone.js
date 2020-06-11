@@ -41,6 +41,28 @@ router.get('/:id', getFormula, (req, res) => {
 });
 
 
+//-----  SÆGNING - Søge efter noget ------------------------------------------
+router.get('/soeg/:soegeord', async (req, res) => {
+
+    const soegeord = req.params.soegeord;
+    console.log(soegeord)
+
+    try {
+    
+        const soegeResultat = await Formula.find({     
+            $or: [
+                {"name": {"$regex": soegeord, "$options": "i"} },  // søg i alt som små bogstaver.
+                { "teams": {"$regex": soegeord, "$options": "i"} },  // søg i alt som små bogstaver.
+                { "number": {"$regex": soegeord, "$options": "i"} } 
+            ]
+        });
+        res.json(soegeResultat);  // Send søgeresultatet som response til klienten/brugeren
+
+    } catch {
+        return res.status(500).json({ message: err.message })  // Man får fejl beskede hvis går galt.
+    }
+});
+
 
 // ----- Creating One - POST http://localhost:3005/formulaone/ ---------------------------------------
 // ----- skal modtage "billede" (filen) og "formula" (data - name + teams)  ---------------------------------------
@@ -51,7 +73,7 @@ router.post('/', upload.single('billede'), async (req, res) => {
     // Gem den nye formula:
     try {
 
-       // "formula": "{\"name\":  \"Strand og\", \"teams\": \"alfa\"}"
+        // "formula": "{\"name\":  \"Strand og\", \"teams\": \"alfa\"}"
         let f = JSON.parse(req.body.formula);
 
         const postedformula = new Formula({
@@ -102,7 +124,7 @@ router.post('/', upload.single('billede'), async (req, res) => {
 //             race: req.body.race,
 //             gridposition: req.body.gridposition,
 //             biography: req.body.biography,
-            
+
 //         });
 //         const oprettetformula = await postedformula.save()
 //         res.status(201).json(oprettetformula)
@@ -200,13 +222,13 @@ router.patch('/:id', upload.single('billede'), getFormula, async (req, res) => {
 // ----- Deleting One - Delete -----------------------------------------
 router.delete('/:id', getFormula, async (req, res) => {
 
-    // try {
-    //     await res.car.remove()
-    //     res.json({ message: 'Citatet er nu slette' })
+    try {
+        await res.formula.remove()
+        res.json({ message: 'Kørere er nu slette' })
 
-    // } catch (err) {
-    //     res.status(500).json({ message: err.message });
-    // }
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
 
 });
 

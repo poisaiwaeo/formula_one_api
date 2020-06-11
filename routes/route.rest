@@ -1,15 +1,15 @@
 // GET all = visning af alle
-GET http://localhost:3005/formulaone
+GET http://localhost:3007/formulaone
 
 ###
 
 // GET with id = visning med id
-GET http://localhost:3005/formulaone/
+GET http://localhost:3007/formulaone/
 
 ###
 
-// POST = opret
-POST http://localhost:3005/formulaone
+// POST = oprette en driver
+POST http://localhost:3007/formulaone
 Content-Type: application/json
 
 {
@@ -26,3 +26,20 @@ Content-Type: application/json
     "race": "1 (x21)",
     "gridposition": "1"
 }
+
+###
+
+// Søge efter drivers
+GET http://localhost:3007/formulaone/soeg/kimi
+
+###
+
+// PATCH = rettet en driver
+# PATCH http://localhost:3007/formulaone/id
+# Content-Type: application/json
+
+# {
+#     "musik": "Lost in japanjjjjjj",
+#     "kunstnere": "Shawnkkkk",
+#     "album": "summerooo"
+# }
